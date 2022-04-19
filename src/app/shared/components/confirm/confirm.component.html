@@ -1,0 +1,30 @@
+
+<section>
+  <div class="modal-header" *ngIf="title">
+    <h5 class="title">
+      <i *ngIf="iconTitle" class="icon fas" [ngClass]="iconTitle" aria-hidden="true"></i>
+      {{ title }}
+    </h5>
+    <fa-icon [icon]="icons[0]" class="hand" (click)="closeModal()"></fa-icon>
+  </div>
+
+  <div class="modal-body">
+
+    <p class="content">
+      {{ content }}
+    </p>
+
+    <div class="d-flex btn-group" *ngIf="!isValidateButtonCancelAndAccept">
+
+      <button type="button" class="btn btn-responsive btn-outline-danger mr-2" (click)="closeModal()">
+        {{ cancelBtn }}
+      </button>
+
+      <button  type="button" class="btn btn-responsive btn-outline-primary" (click)="onAccept.emit()">
+        {{ acceptBtn }}
+      </button>
+    </div>
+
+  </div>
+
+</section>

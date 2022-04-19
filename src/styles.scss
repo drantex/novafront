@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hand{
+  cursor: pointer
+}
+
+span.hand.span-action {
+  font-size: 20px;
+  text-align: center;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(199, 199, 199);
+  border-radius: 20px;
+  @media (max-width: 575px) {
+    background: rgb(199, 199, 199);
+  }
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/**  Fin Scroll */
+
+/** Contenedor del progress*/
+.container-progress {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+  background-color: #ffffff70;
+  border-radius: 4px;
+  top: 0;
+  left: 0px;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

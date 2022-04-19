@@ -1,0 +1,152 @@
+<section>
+  <div class="container-progress" *ngIf="loading">
+      <app-progress [loading]="loading" [message]="'Cargando'"></app-progress>
+  </div>
+
+  <div class="modal-header">
+      <h4 class="modal-title">{{ title }}</h4>
+      <fa-icon [icon]="icons[0]" class="hand" (click)="onCancel()"></fa-icon>
+  </div>
+
+  <div class="modal-body">
+      <form class="form-horizontal container-data" [formGroup]="form" novalidate>
+          <div class="form-group">
+              <div class="container-fluid">
+
+                <!-- Primer y segundo nombre -->
+                  <div class="row">
+
+                      <div class="col-md-6 col-sm-12 mb-2">
+                          <div class="col-12">
+                              <label htmlFor="acSimple">{{'Primer nombre' }}</label>
+                              <span class="required text-alltic-h">
+                                  <i aria-hidden="true" class="fas fa-asterisk"></i>
+                              </span>
+                          </div>
+                          <div class="col-12">
+                              <input  class="form-control "
+                                  type="text"
+                                  minlength="3"
+                                  maxlength="30"
+                                  placeholder="{{''}}"
+                                  id="name"
+                                  formControlName="name"
+                                  [ngClass]="{
+                                      'is-invalid': form.controls['name'].touched && form.controls['name'].errors,
+                                      'is-valid': form.controls['name'].valid
+                                  }">
+                          </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-12 mb-2">
+                          <div class="col-12">
+                              <label htmlFor="acSimple">{{'Segundo nombre' }}</label>
+                          </div>
+                          <div class="col-12">
+                              <input  class="form-control "
+                                  type=" text"
+                                  minlength="3"
+                                  maxlength="30"
+                                  placeholder="{{''}}"
+                                  id="secondName"
+                                  formControlName="secondName"
+                                  [ngClass]="{
+                                      'is-invalid': form.controls['secondName'].touched && form.controls['secondName'].errors,
+                                      'is-valid': form.controls['secondName'].valid && form.controls['secondName'].touched
+                                  }"/>
+                          </div>
+                      </div>
+
+                  </div>
+
+                  <!-- Primer y segundo apellido -->
+                  <div class="row">
+
+                      <div class="col-md-6 col-sm-12 mb-2">
+                          <div class="col-12">
+                              <label htmlFor="acSimple">{{'Primer apellido' }}</label>
+                              <span class="required text-alltic-h">
+                                  <i aria-hidden="true" class="fas fa-asterisk"></i>
+                              </span>
+                          </div>
+                          <div class="col-12">
+                              <input  class="form-control "
+                              type="text"
+                              minlength="3"
+                              maxlength="30"
+                              placeholder="{{''}}"
+                              id="lastName"
+                              formControlName="lastName"
+                              [ngClass]="{
+                                  'is-invalid': form.controls['lastName'].touched && form.controls['lastName'].errors,
+                                  'is-valid': form.controls['lastName'].valid && form.controls['lastName'].touched
+                              }"
+                              />
+                          </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-12 mb-2">
+                          <div class="col-12">
+                              <label htmlFor="acSimple">{{'Segundo nombre' }}</label>
+                          </div>
+                          <div class="col-12">
+                              <input  class="form-control"
+                                  type="text"
+                                  minlength="3"
+                                  maxlength="30"
+                                  placeholder="{{''}}"
+                                  id="secondLastName"
+                                  formControlName="secondLastName"
+                                  [ngClass]="{
+                                      'is-invalid': form.controls['secondLastName'].touched && form.controls['secondLastName'].errors,
+                                      'is-valid': form.controls['secondLastName'].valid && form.controls['secondLastName'].touched
+                                  }" />
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Tipo de documento y número de documento -->
+                  <div class="row">
+
+                      <div class="col-md-6 col-sm-12 mb-2">
+                          <div class="col-12">
+                              <label htmlFor="acSimple">{{'Número de documento' }}</label>
+                              <span class="required text-alltic-h">
+                                  <i aria-hidden="true" class="fas fa-asterisk"></i>
+                              </span>
+                          </div>
+                          <div class="col-12">
+                              <input  class="form-control "
+                                  type="text"
+                                  minlength="2"
+                                  maxlength="30"
+                                  placeholder="{{''}}"
+                                  id="documentNumber"
+                                  formControlName="documentNumber"
+                                  [ngClass]="{
+                                      'is-invalid': form.controls['documentNumber'].touched && form.controls['documentNumber'].errors,
+                                      'is-valid': form.controls['documentNumber'].valid
+                                  }"
+                                  />
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </form>
+  </div>
+  <div class="modal-footer btn-group">
+
+      <button type="button" class="btn btn-responsive btn-outline-danger" (click)="onCancel()">
+          {{'Cancelar' }}
+      </button>
+
+      <button type="button"
+              class="btn btn-responsive btn-outline-primary"
+              [disabled]="!form.valid"
+              (click)="onSaveUser()">
+          {{ (isEdit ? 'Editar' : 'Guardar') }}
+      </button>
+  </div>
+</section>

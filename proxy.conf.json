@@ -1,0 +1,14 @@
+{
+    "/Student": {
+        "target": "http://localhost:8080",
+        "secure": false,
+        "changeOrigin": true,
+        "timeout": 30000
+    },
+    "/Teacher": {
+        "target": "http://localhost:8080",
+        "secure": false,
+        "changeOrigin": true,
+        "timeout": 30000
+    }
+}

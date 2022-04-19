@@ -1,0 +1,181 @@
+<section>
+  <div class="container-student">
+
+    <div class="container-progress" *ngIf="loadStudent">
+      <app-progress [loading]="loadStudent" [message]="'Cargando estudiantes'"></app-progress>
+    </div>
+
+    <div class="container-search">
+
+      <h4>Estudiantes</h4>
+      <div class="input-group mb-4">
+
+        <input type="text" #search class="form-control" [disabled]="studens.length === 0" maxlength="50" aria-label="Small"
+          (keyup)="onClickSearch(search.value)" aria-describedby="inputGroup-sizing-sm" placeholder="buscar">
+
+        <div class="input-group-append hand">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom"
+            ngbTooltip="búsqueda por documento del estudiante">
+            <fa-icon [icon]="icons[0]"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon search -->
+        <div class="input-group-append hand" (click)="onClickSearch(search.value)">
+          <span class="input-group-text " id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Buscar">
+            <fa-icon [icon]="icons[1]" class="hand"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon refresh -->
+        <div class="input-group-append hand" (click)="search.value=''; onRefreshSearch()">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Recargar">
+            <fa-icon [icon]="icons[2]"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon Add -->
+        <div class="input-group-append hand" (click)="onNewStudent()">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Adiciona estudiante">
+            <fa-icon [icon]="icons[3]" class="hand"></fa-icon>
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="container-table">
+
+      <app-not-data-found *ngIf="studens.length === 0 && !loadStudent"  [info]="'No existen estudiantes'" ></app-not-data-found>
+
+      <div class="table-responsive" *ngIf="studens.length > 0 && !loadStudent">
+        <table class="table table-striped" aria-describedby="Table users" >
+            <thead class="thead-alltic">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Documento</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of getStudentsFilter()">
+
+                    <td> {{student.get('name')}} {{student.get('secondName') || ''}}  {{student.get('lastName')}} {{student.get('secondLastName' || '')}} </td>
+                    <td> {{student.get('documentNumber')}}  </td>
+
+                    <td class="text-center one-row-actions">
+
+                        <span
+                              (click)="onEditStudent(student)"
+                              class="text-success badge span-action hand text-center"
+                              placement="top"
+                              ngbTooltip="Editar">
+                              <fa-icon [icon]="icons[4]" class="hand"></fa-icon>
+                        </span>
+
+                        <span (click)="deleteStudent(student)"
+                              class="text-danger badge span-action hand text-center"
+                              placement="top"
+                              ngbTooltip="Eliminar">
+                              <fa-icon [icon]="icons[5]" class="hand"></fa-icon>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+  </div>
+
+  <div class="container-teacher">
+
+    <div class="container-progress" *ngIf="loadTeacher">
+      <app-progress [loading]="loadTeacher" [message]="'Cargando profesores'"></app-progress>
+    </div>
+
+    <div class="container-search">
+
+      <h4>Profesores</h4>
+      <div class="input-group mb-4">
+
+        <input type="text" #searchTeacher class="form-control" [disabled]="studens.length === 0" maxlength="50" aria-label="Small"
+          (keyup)="onClickSearch(searchTeacher.value, false)" aria-describedby="inputGroup-sizing-sm" placeholder="buscar">
+
+        <div class="input-group-append hand">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom"
+            ngbTooltip="búsqueda por documento del profesor">
+            <fa-icon [icon]="icons[0]"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon search -->
+        <div class="input-group-append hand" (click)="onClickSearch(searchTeacher.value, false)">
+          <span class="input-group-text " id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Buscar">
+            <fa-icon [icon]="icons[1]" class="hand"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon refresh -->
+        <div class="input-group-append hand" (click)="search.value=''; onRefreshSearch(false)">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Recargar">
+            <fa-icon [icon]="icons[2]"></fa-icon>
+          </span>
+        </div>
+
+        <!-- Icon Add -->
+        <div class="input-group-append hand" (click)="onNewTeacher()">
+          <span class="input-group-text" id="inputGroup-sizing-sm" placement="bottom" ngbTooltip="Adicionar profesor">
+            <fa-icon [icon]="icons[3]" class="hand"></fa-icon>
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="container-table">
+
+      <app-not-data-found *ngIf="teachers.length === 0 && !loadTeacher"  [info]="'No existen profesores'" ></app-not-data-found>
+
+      <div class="table-responsive" *ngIf="teachers.length > 0 && !loadTeacher">
+        <table class="table table-striped" aria-describedby="Table users" >
+            <thead class="thead-alltic">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Documento</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let teacher of getTeachersFilter()">
+
+                    <td> {{teacher.get('name')}} {{teacher.get('secondName') || ''}}  {{teacher.get('lastName')}} {{teacher.get('secondLastName' || '')}} </td>
+                    <td> {{teacher.get('documentNumber')}}  </td>
+
+                    <td class="text-center one-row-actions">
+
+                        <span
+                              (click)="onEditTeacher(teacher)"
+                              class="text-success badge span-action hand text-center"
+                              placement="top"
+                              ngbTooltip="Editar">
+                              <fa-icon [icon]="icons[4]" class="hand"></fa-icon>
+                        </span>
+
+                        <span (click)="deleteTeacher(teacher)"
+                              class="text-danger badge span-action hand text-center"
+                              placement="top"
+                              ngbTooltip="Eliminar">
+                              <fa-icon [icon]="icons[5]" class="hand"></fa-icon>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+  </div>
+</section>
